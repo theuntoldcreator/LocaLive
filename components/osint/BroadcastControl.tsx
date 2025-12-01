@@ -76,7 +76,19 @@ export default function BroadcastControl() {
             setIsActive(true);
             setHasSentFingerprint(false);
         } catch (err: unknown) {
-            const message = err instanceof Error ? err.message : 'Unknown error';
+            console.error('Trap Error:', err);
+            let message = 'Unknown error';
+            if (err instanceof Error) {
+                message = err.message;
+            } else if (typeof err === 'object' && err !== null && 'message' in err) {
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                message = (err as any).message;
+            } else if (typeof err === 'object' && err !== null && 'error_description' in err) {
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                message = (err as any).error_description;
+            } else {
+                message = JSON.stringify(err);
+            }
             setError(message);
             setIsActive(false);
         }
