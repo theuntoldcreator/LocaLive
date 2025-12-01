@@ -81,7 +81,6 @@ export const getFingerprint = async (): Promise<DeviceFingerprint> => {
         screenResolution: `${window.screen.width}x${window.screen.height}`,
         gpuRenderer,
         cpuCores: navigator.hardwareConcurrency || 0,
-        // @ts-ignore
         ramGb: (navigator as any).deviceMemory || 0,
         timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
         language: navigator.language,

@@ -3,8 +3,19 @@ import { supabase } from '@/lib/supabase';
 import { AlertTriangle, Camera, MapPin, Radio, Smartphone, Wifi } from 'lucide-react';
 import Image from 'next/image';
 
+interface TimelineEvent {
+    id: string;
+    title: string;
+    location: string;
+    time: string;
+    type: string;
+    severity: string;
+    team: string;
+    image: string | null;
+}
+
 export default function OsintTimeline() {
-    const [events, setEvents] = useState<any[]>([]);
+    const [events, setEvents] = useState<TimelineEvent[]>([]);
 
     useEffect(() => {
         // Fetch recent location updates as "events"
@@ -20,7 +31,7 @@ export default function OsintTimeline() {
                 .limit(20);
 
             if (data) {
-                const mappedEvents = data.map((loc: any) => ({
+                const mappedEvents = data.map((loc: { id: string; lat: number; lng: number; updated_at: string; accuracy: number }) => ({
                     id: loc.id,
                     title: 'Location Update',
                     location: `${loc.lat.toFixed(4)}, ${loc.lng.toFixed(4)}`,
@@ -40,7 +51,7 @@ export default function OsintTimeline() {
         const channel = supabase
             .channel('osint-timeline')
             .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'locations' }, (payload) => {
-                const loc = payload.new as any;
+                const loc = payload.new as { id: string; lat: number; lng: number; accuracy: number };
                 const newEvent = {
                     id: loc.id,
                     title: 'Live Signal',

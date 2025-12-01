@@ -8,10 +8,8 @@ export function useOrientation() {
             let newHeading: number | null = null;
 
             // iOS
-            // @ts-ignore
-            if ((event).webkitCompassHeading) {
-                // @ts-ignore
-                newHeading = (event).webkitCompassHeading;
+            if ((event as any).webkitCompassHeading) {
+                newHeading = (event as any).webkitCompassHeading;
             }
             // Android / Standard
             else if (event.alpha !== null) {
@@ -30,12 +28,10 @@ export function useOrientation() {
         const requestPermission = async () => {
             if (
                 typeof DeviceOrientationEvent !== 'undefined' &&
-                // @ts-ignore
-                (DeviceOrientationEvent).requestPermission
+                (DeviceOrientationEvent as any).requestPermission
             ) {
                 try {
-                    // @ts-ignore
-                    const response = await (DeviceOrientationEvent).requestPermission();
+                    const response = await (DeviceOrientationEvent as any).requestPermission();
                     if (response === 'granted') {
                         window.addEventListener('deviceorientation', handleOrientation);
                     }
