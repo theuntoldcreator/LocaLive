@@ -16,7 +16,7 @@ const createStorageAdapter = () => {
     window.localStorage.setItem(key, key);
     window.localStorage.removeItem(key);
     return window.localStorage;
-  } catch (e) {
+  } catch {
     // Fallback to memory storage if localStorage is blocked
     console.warn('LocalStorage not available, using memory storage');
     const memoryStorage = new Map<string, string>();
