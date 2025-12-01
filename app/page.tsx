@@ -4,7 +4,7 @@ import { useEffect, useState, useRef } from 'react';
 import { supabase } from '@/lib/supabase';
 import dynamic from 'next/dynamic';
 import OsintIntelPanel from '@/components/osint/OsintIntelPanel';
-import OsintMapOverlay from '@/components/osint/OsintMapOverlay';
+// import OsintMapOverlay from '@/components/osint/OsintMapOverlay'; // Unused
 import DashboardHeader from '@/components/DashboardHeader';
 
 // Dynamic import for Map
@@ -48,7 +48,7 @@ export default function Home() {
     const sessionChannel = supabase
       .channel('osint-sessions')
       .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'sessions' }, (payload) => {
-        const newSession = payload.new as any;
+        const newSession = payload.new as { active: boolean; id: string };
         if (newSession.active) {
           // Cancel any pending termination reload (User is rotating keys, not quitting)
           if (terminationTimeoutRef.current) {
@@ -67,7 +67,7 @@ export default function Home() {
         }
       })
       .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'sessions' }, (payload) => {
-        const updatedSession = payload.new as any;
+        const updatedSession = payload.new as { active: boolean; id: string };
         if (!updatedSession.active && updatedSession.id === activeSessionId) {
           // TERMINATING TRANSITION
           setSystemStatus('terminating');
@@ -120,7 +120,7 @@ export default function Home() {
         table: 'locations',
         filter: `session_id=eq.${activeSessionId}`
       }, (payload) => {
-        const newLoc = payload.new as any;
+        const newLoc = payload.new as { lat: number; lng: number; accuracy: number; heading: number | null };
         setLocation({ lat: newLoc.lat, lng: newLoc.lng, accuracy: newLoc.accuracy || 0 });
         setHeading(newLoc.heading);
         setPath(prev => [...prev, [newLoc.lat, newLoc.lng]]);

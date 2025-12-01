@@ -3,14 +3,14 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
 import BroadcastControl from './BroadcastControl';
-import { Activity, AlertTriangle, Camera, Clock, Globe, MapPin, Radio, Smartphone, Wifi, List, User } from 'lucide-react';
+import { AlertTriangle, Globe, MapPin, Radio, List, User } from 'lucide-react';
 
 export default function OsintIntelPanel() {
     const [activeTab, setActiveTab] = useState<'target' | 'feed'>('target');
     const [activeSession, setActiveSession] = useState<any>(null);
     const [target, setTarget] = useState<any>(null);
     const [visitorIp, setVisitorIp] = useState<string | null>(null);
-    const [events, setEvents] = useState<any[]>([]);
+    const [events, setEvents] = useState<any[]>([]); // Keeping any for now as event structure is loose
 
     // Fetch Active Session & Target Profile
     const fetchData = async () => {

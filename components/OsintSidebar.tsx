@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '@/lib/supabase';
-import { Activity, Database, Globe, Home, LayoutDashboard, Map as MapIcon, Search, Settings, ShieldAlert, Users } from 'lucide-react';
+import { Globe, Home } from 'lucide-react';
 import Link from 'next/link';
 import BroadcastControl from './osint/BroadcastControl';
 

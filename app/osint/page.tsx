@@ -75,7 +75,7 @@ export default function OsintPage() {
                 table: 'locations',
                 filter: `session_id=eq.${activeSessionId}`
             }, (payload) => {
-                const newLoc = payload.new as any;
+                const newLoc = payload.new as { lat: number; lng: number; accuracy: number; heading: number | null };
                 setLocation({ lat: newLoc.lat, lng: newLoc.lng, accuracy: newLoc.accuracy || 0 });
                 setHeading(newLoc.heading);
                 setPath(prev => [...prev, [newLoc.lat, newLoc.lng]]);

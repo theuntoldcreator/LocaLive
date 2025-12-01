@@ -35,7 +35,7 @@ export async function POST(request: Request) {
             const ip = request.headers.get('x-forwarded-for') || '127.0.0.1';
 
             // Enrich IP Data (Server-side)
-            let ipData = {};
+            let ipData: Record<string, any> = {};
 
             // Handle Localhost
             if (ip === '::1' || ip === '127.0.0.1' || ip === 'localhost') {
@@ -85,11 +85,11 @@ export async function POST(request: Request) {
                 .insert([{
                     session_id: sessionId,
                     ip_address: ip,
-                    isp: (ipData as any).isp || 'Unknown',
-                    asn: (ipData as any).as || 'Unknown',
-                    country: (ipData as any).country || 'Unknown',
-                    city: (ipData as any).city || 'Unknown',
-                    region: (ipData as any).regionName || 'Unknown',
+                    isp: ipData.isp || 'Unknown',
+                    asn: ipData.as || 'Unknown',
+                    country: ipData.country || 'Unknown',
+                    city: ipData.city || 'Unknown',
+                    region: ipData.regionName || 'Unknown',
                     is_proxy: false, // Placeholder for real detection
                     is_vpn: false,
                     is_tor: false,
@@ -101,8 +101,9 @@ export async function POST(request: Request) {
 
         return NextResponse.json({ success: true });
 
-    } catch (error: any) {
+    } catch (error: unknown) {
         console.error('Update location error:', error);
-        return NextResponse.json({ error: error.message }, { status: 500 });
+        const message = error instanceof Error ? error.message : 'Unknown error';
+        return NextResponse.json({ error: message }, { status: 500 });
     }
 }

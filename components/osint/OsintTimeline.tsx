@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '@/lib/supabase';
-import { AlertTriangle, Camera, Clock, MapPin, Radio, Smartphone, Wifi } from 'lucide-react';
+import { AlertTriangle, Camera, MapPin, Radio, Smartphone, Wifi } from 'lucide-react';
+import Image from 'next/image';
 
 export default function OsintTimeline() {
     const [events, setEvents] = useState<any[]>([]);
@@ -74,8 +75,8 @@ export default function OsintTimeline() {
                     <div key={event.id} className="glass-panel rounded-2xl p-4 hover:border-cyan-500/40 transition-colors group cursor-pointer relative overflow-hidden">
                         {/* Severity Indicator */}
                         <div className={`absolute left-0 top-0 bottom-0 w-1 ${event.severity === 'critical' ? 'bg-red-500' :
-                                event.severity === 'high' ? 'bg-orange-500' :
-                                    event.severity === 'medium' ? 'bg-yellow-500' : 'bg-blue-500'
+                            event.severity === 'high' ? 'bg-orange-500' :
+                                event.severity === 'medium' ? 'bg-yellow-500' : 'bg-blue-500'
                             }`}></div>
 
                         <div className="flex gap-4 pl-2">
@@ -103,7 +104,7 @@ export default function OsintTimeline() {
 
                                 {event.image && (
                                     <div className="mb-3 rounded-lg overflow-hidden h-24 relative">
-                                        <img src={event.image} alt="Evidence" className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" />
+                                        <Image src={event.image} alt="Evidence" fill className="object-cover opacity-80 group-hover:opacity-100 transition-opacity" />
                                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                                     </div>
                                 )}

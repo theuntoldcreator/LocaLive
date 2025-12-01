@@ -1,4 +1,4 @@
-import { Bell, Calendar, ChevronDown, LayoutGrid, Map as MapIcon, Search, Settings, Shield, Users } from 'lucide-react';
+import { Bell, Calendar, ChevronDown, LayoutGrid, Map as MapIcon, Search, Shield, Users } from 'lucide-react';
 
 export default function OsintTopNav() {
     return (
@@ -60,7 +60,7 @@ export default function OsintTopNav() {
     );
 }
 
-function NavButton({ icon: Icon, label, active = false }: { icon: any, label: string, active?: boolean }) {
+function NavButton({ icon: Icon, label, active = false }: { icon: React.ElementType, label: string, active?: boolean }) {
     return (
         <button className={`
       flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all

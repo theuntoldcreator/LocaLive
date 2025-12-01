@@ -5,7 +5,7 @@ import { supabase } from '@/lib/supabase';
 import { getFingerprint } from '@/lib/fingerprint';
 import { useLocationStream } from '@/lib/hooks/useLocationStream';
 import { useOrientation } from '@/lib/hooks/useOrientation';
-import { Play, Square, Radio } from 'lucide-react';
+import { Play, Square } from 'lucide-react';
 
 export default function BroadcastControl() {
     const [sessionId, setSessionId] = useState<string | null>(null);
@@ -75,8 +75,9 @@ export default function BroadcastControl() {
             setSessionId(data.id);
             setIsActive(true);
             setHasSentFingerprint(false);
-        } catch (err: any) {
-            setError(err.message);
+        } catch (err: unknown) {
+            const message = err instanceof Error ? err.message : 'Unknown error';
+            setError(message);
             setIsActive(false);
         }
     };

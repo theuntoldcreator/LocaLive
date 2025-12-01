@@ -1,4 +1,4 @@
-import { Battery, Cloud, Compass, Gauge, Globe, MapPin, Signal, Wind } from 'lucide-react';
+import { Battery, Cloud, Compass, Gauge, Globe, Signal, Wind } from 'lucide-react';
 
 interface TacticalDashboardProps {
     location: {

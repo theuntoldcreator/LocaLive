@@ -20,9 +20,9 @@ export interface DeviceFingerprint {
 export const getFingerprint = async (): Promise<DeviceFingerprint> => {
     const ua = navigator.userAgent;
     let osName = 'Unknown';
-    let osVersion = 'Unknown';
+    const osVersion = 'Unknown';
     let browserName = 'Unknown';
-    let browserVersion = 'Unknown';
+    const browserVersion = 'Unknown';
 
     // Basic OS Detection
     if (ua.indexOf('Win') !== -1) osName = 'Windows';
@@ -81,6 +81,7 @@ export const getFingerprint = async (): Promise<DeviceFingerprint> => {
         screenResolution: `${window.screen.width}x${window.screen.height}`,
         gpuRenderer,
         cpuCores: navigator.hardwareConcurrency || 0,
+        // @ts-ignore
         ramGb: (navigator as any).deviceMemory || 0,
         timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
         language: navigator.language,
