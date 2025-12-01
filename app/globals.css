@@ -3,25 +3,70 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+  /* Tactical Monochrome (Default) */
+  --tactical-black: #000000;
+  --tactical-dark: #111111;
+  --tactical-grey: #444444;
+  --tactical-light: #888888;
+  --tactical-white: #ffffff;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  /* Cyber Navy OSINT Palette */
+  --osint-bg: #0b1221;
+  --osint-card: rgba(17, 24, 39, 0.8);
+  /* Glassmorphism base */
+  --osint-border: rgba(56, 189, 248, 0.2);
+  --osint-accent: #06b6d4;
+  /* Cyan */
+  --osint-accent-hover: #38bdf8;
+  --osint-text-primary: #f8fafc;
+  --osint-text-secondary: #94a3b8;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--tactical-black);
+  color: var(--tactical-white);
+  overflow: hidden;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+/* Map Filters for Tactical Look (Default) */
+.cyberpunk-map .leaflet-tile-pane {
+  filter: grayscale(100%) contrast(1.1);
+}
+
+/* OSINT Map Theme Override */
+.osint-map .leaflet-tile-pane {
+  filter: grayscale(100%) invert(100%) contrast(1.2) brightness(0.6) hue-rotate(180deg) saturate(300%);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--tactical-grey);
+  border-radius: 2px;
+}
+
+/* Utilities */
+.glass-panel {
+  background: var(--osint-card);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--osint-border);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+}
+
+.text-glow {
+  text-shadow: 0 0 10px rgba(6, 182, 212, 0.5);
+}
+
+/* Tactical HUD Utilities (Legacy/Home) */
+.tactical-border {
+  border: 1px solid var(--tactical-grey);
+  background: rgba(0, 0, 0, 0.9);
 }
