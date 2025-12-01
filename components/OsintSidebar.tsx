@@ -5,6 +5,7 @@ import Link from 'next/link';
 import BroadcastControl from './osint/BroadcastControl';
 
 export default function OsintSidebar() {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [target, setTarget] = useState<any>(null);
 
     useEffect(() => {

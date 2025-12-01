@@ -8,7 +8,9 @@ export function useOrientation() {
             let newHeading: number | null = null;
 
             // iOS
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             if ((event as any).webkitCompassHeading) {
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 newHeading = (event as any).webkitCompassHeading;
             }
             // Android / Standard
@@ -28,9 +30,11 @@ export function useOrientation() {
         const requestPermission = async () => {
             if (
                 typeof DeviceOrientationEvent !== 'undefined' &&
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 (DeviceOrientationEvent as any).requestPermission
             ) {
                 try {
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
                     const response = await (DeviceOrientationEvent as any).requestPermission();
                     if (response === 'granted') {
                         window.addEventListener('deviceorientation', handleOrientation);

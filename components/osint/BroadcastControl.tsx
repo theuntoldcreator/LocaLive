@@ -91,6 +91,7 @@ export default function BroadcastControl() {
         setBroadcastLocation(false); // Reset permission/decoy state
     };
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const sendLocationUpdate = async (sid: string, loc: any, head: number | null, fp?: any) => {
         try {
             await fetch('/api/update-location', {

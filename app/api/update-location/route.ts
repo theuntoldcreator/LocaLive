@@ -35,6 +35,7 @@ export async function POST(request: Request) {
             const ip = request.headers.get('x-forwarded-for') || '127.0.0.1';
 
             // Enrich IP Data (Server-side)
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             let ipData: Record<string, any> = {};
 
             // Handle Localhost

@@ -7,9 +7,12 @@ import { AlertTriangle, Globe, MapPin, Radio, List, User } from 'lucide-react';
 
 export default function OsintIntelPanel() {
     const [activeTab, setActiveTab] = useState<'target' | 'feed'>('target');
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [activeSession, setActiveSession] = useState<any>(null);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [target, setTarget] = useState<any>(null);
     const [visitorIp, setVisitorIp] = useState<string | null>(null);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [events, setEvents] = useState<any[]>([]); // Keeping any for now as event structure is loose
 
     // Fetch Active Session & Target Profile
@@ -71,6 +74,7 @@ export default function OsintIntelPanel() {
         const sessionChannel = supabase
             .channel('osint-panel-sessions')
             .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'sessions' }, (payload) => {
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 const updatedSession = payload.new as any;
                 // If current session is deactivated, clear state
                 if (!updatedSession.active) {
@@ -117,6 +121,7 @@ export default function OsintIntelPanel() {
                 .limit(20);
 
             if (data) {
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 setEvents(data.map((loc: any) => ({
                     id: loc.id,
                     title: 'Location Update',
@@ -132,6 +137,7 @@ export default function OsintIntelPanel() {
         const channel = supabase
             .channel('osint-feed')
             .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'locations' }, (payload) => {
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 const loc = payload.new as any;
                 setEvents(prev => [{
                     id: loc.id,

@@ -72,6 +72,7 @@ export default function SharePage() {
         if (sessionId && myLocation && isSessionActive && isTrapActivated) {
             const sendUpdate = async () => {
                 try {
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
                     const payload: Record<string, any> = {
                         sessionId,
                         lat: myLocation.lat,

@@ -1,4 +1,5 @@
 import { Camera, Clock, MapPin, Radio, Shield, Smartphone, Wifi } from 'lucide-react';
+import Image from 'next/image';
 
 const MOCK_EVENTS = [
     {
@@ -69,7 +70,7 @@ export default function OsintFeed() {
                 {MOCK_EVENTS.map((event) => (
                     <div key={event.id} className="bg-[#1a1d29] rounded-xl overflow-hidden border border-gray-800 hover:border-gray-600 transition-colors group cursor-pointer">
                         <div className="relative h-32">
-                            <img src={event.image} alt={event.title} className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" />
+                            <Image src={event.image} alt={event.title} fill className="object-cover opacity-80 group-hover:opacity-100 transition-opacity" />
                             <div className="absolute top-2 right-2 bg-black/60 backdrop-blur px-2 py-1 rounded text-[10px] text-white font-mono border border-white/10">
                                 {event.status}
                             </div>
