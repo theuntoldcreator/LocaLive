@@ -22,8 +22,12 @@ const createStorageAdapter = () => {
     const memoryStorage = new Map<string, string>();
     return {
       getItem: (key: string) => memoryStorage.get(key) || null,
-      setItem: (key: string, value: string) => memoryStorage.set(key, value),
-      removeItem: (key: string) => memoryStorage.delete(key),
+      setItem: (key: string, value: string) => {
+        memoryStorage.set(key, value);
+      },
+      removeItem: (key: string) => {
+        memoryStorage.delete(key);
+      },
     };
   }
 };
