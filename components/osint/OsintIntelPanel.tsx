@@ -156,7 +156,7 @@ export default function OsintIntelPanel() {
     }, []);
 
     return (
-        <div className="w-[350px] h-full flex flex-col bg-[#0f111a]/90 backdrop-blur-xl border-r border-gray-800 z-20">
+        <div className="w-full md:w-[350px] h-full flex flex-col bg-[#0f111a]/90 backdrop-blur-xl border-t md:border-t-0 md:border-r border-gray-800 z-20">
 
 
 

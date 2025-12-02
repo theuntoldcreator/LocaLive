@@ -42,7 +42,7 @@ export default function DashboardHeader({ location }: DashboardHeaderProps) {
     }, []);
 
     return (
-        <div className="h-16 bg-[#0b1221] border-b border-gray-800 flex items-center justify-between px-6 z-20 flex-shrink-0">
+        <div className="h-16 bg-[#0b1221] border-b border-gray-800 flex items-center justify-between px-4 md:px-6 z-20 flex-shrink-0">
             {/* Left: Branding */}
             <div className="flex items-center gap-3">
                 <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center shadow-lg shadow-blue-500/20">
@@ -67,7 +67,7 @@ export default function DashboardHeader({ location }: DashboardHeaderProps) {
                         </div>
                     </div>
 
-                    <div className="flex items-center gap-2 text-gray-300">
+                    <div className="hidden md:flex items-center gap-2 text-gray-300">
                         <Calendar className="w-4 h-4 text-cyan-500" />
                         <div className="flex flex-col items-end">
                             <span className="text-xs font-bold text-white leading-none">{date}</span>
@@ -76,7 +76,7 @@ export default function DashboardHeader({ location }: DashboardHeaderProps) {
                     </div>
 
                     {weather && (
-                        <div className="flex items-center gap-2 text-gray-300">
+                        <div className="hidden md:flex items-center gap-2 text-gray-300">
                             <Cloud className="w-4 h-4 text-cyan-500" />
                             <div className="flex flex-col items-end">
                                 <span className="text-xs font-bold text-white leading-none">{weather.temperature}°C</span>

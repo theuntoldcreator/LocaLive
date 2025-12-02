@@ -150,15 +150,19 @@ export default function Home() {
       {/* New Dashboard Header */}
       <DashboardHeader location={location} />
 
-      <div className="flex-1 flex overflow-hidden relative z-10">
+      <div className="flex-1 flex flex-col md:flex-row overflow-hidden relative z-10">
 
         {/* Unified Intelligence Panel (Sidebar) */}
-        <div className="flex-shrink-0 h-full">
+        {/* Mobile: Bottom (Order 2), Height 40vh */}
+        {/* Desktop: Left (Order 1), Height Full */}
+        <div className="flex-shrink-0 h-[40vh] md:h-full order-2 md:order-1">
           <OsintIntelPanel />
         </div>
 
         {/* Main Content Area with Rounded Map */}
-        <div className="flex-1 relative overflow-hidden">
+        {/* Mobile: Top (Order 1), Flex-1 */}
+        {/* Desktop: Right (Order 2), Flex-1 */}
+        <div className="flex-1 relative overflow-hidden order-1 md:order-2">
           {/* Inner Map Container with Rounded Corners */}
           <div className="absolute inset-0 z-0">
             <Map
