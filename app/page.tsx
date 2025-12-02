@@ -158,9 +158,9 @@ export default function Home() {
         </div>
 
         {/* Main Content Area with Rounded Map */}
-        <div className="flex-1 relative bg-[#f3f4f6] p-4 rounded-tl-3xl overflow-hidden">
+        <div className="flex-1 relative overflow-hidden">
           {/* Inner Map Container with Rounded Corners */}
-          <div className="absolute inset-8 rounded-3xl overflow-hidden shadow-2xl border border-gray-200 bg-white z-0">
+          <div className="absolute inset-0 z-0">
             <Map
               lat={location?.lat || 0}
               lng={location?.lng || 0}

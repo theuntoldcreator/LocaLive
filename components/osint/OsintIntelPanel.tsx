@@ -157,43 +157,9 @@ export default function OsintIntelPanel() {
 
     return (
         <div className="w-[350px] h-full flex flex-col bg-[#0f111a]/90 backdrop-blur-xl border-r border-gray-800 z-20">
-            {/* Header */}
-            <div className="p-4 border-b border-gray-800 flex items-center gap-3">
-                <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center shadow-lg shadow-blue-500/20">
-                    <Globe className="w-5 h-5 text-white" />
-                </div>
-                <div>
-                    <h1 className="text-white font-bold text-sm tracking-wide">LocaLive</h1>
-                    <p className="text-[10px] text-gray-500 uppercase tracking-wider">Intelligence Platform</p>
-                </div>
-            </div>
 
-            {/* Navigation Menu */}
-            <div className="p-4 border-b border-gray-800">
-                <nav className="space-y-1">
-                    <button className="w-full flex items-center gap-3 px-3 py-2 text-xs font-medium text-white bg-cyan-500/10 border border-cyan-500/20 rounded-lg transition-colors">
-                        <div className="w-4 h-4 grid grid-cols-2 gap-0.5">
-                            <div className="bg-cyan-400 rounded-[1px]"></div>
-                            <div className="bg-cyan-400 rounded-[1px]"></div>
-                            <div className="bg-cyan-400 rounded-[1px]"></div>
-                            <div className="bg-cyan-400 rounded-[1px]"></div>
-                        </div>
-                        Dashboard
-                    </button>
-                    <button className="w-full flex items-center gap-3 px-3 py-2 text-xs font-medium text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors">
-                        <MapPin className="w-4 h-4" />
-                        Live Map
-                    </button>
-                    <button className="w-full flex items-center gap-3 px-3 py-2 text-xs font-medium text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors">
-                        <User className="w-4 h-4" />
-                        Targets
-                    </button>
-                    <button className="w-full flex items-center gap-3 px-3 py-2 text-xs font-medium text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors">
-                        <AlertTriangle className="w-4 h-4" />
-                        Threats
-                    </button>
-                </nav>
-            </div>
+
+
 
             {/* Tabs */}
             <div className="flex border-b border-gray-800">
