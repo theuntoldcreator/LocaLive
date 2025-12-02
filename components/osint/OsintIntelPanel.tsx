@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
 import BroadcastControl from './BroadcastControl';
-import { AlertTriangle, Globe, MapPin, Radio, List, User } from 'lucide-react';
+import { MapPin, Radio, List, User } from 'lucide-react';
 
 export default function OsintIntelPanel() {
     const [activeTab, setActiveTab] = useState<'target' | 'feed'>('target');
